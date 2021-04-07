@@ -5,6 +5,7 @@ import random
 
 pygame.init()
 
+#set (Red, Green, Blue) #RGB
 black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
@@ -19,10 +20,9 @@ screen_height = 600 #y
 
 #sets screen up
 screen = pygame.display.set_mode((screen_width, screen_height))
-screen.fill(white)
+screen.fill(black)
 
 pixelset = pygame.PixelArray(screen)
-pixelset[10][20] = white
 
 clock = pygame.time.Clock()
 
@@ -34,9 +34,14 @@ def Screen_Output():
             if event.type == pygame.QUIT:
                 running = False
                 break
-            else:
-                screen.fill(black)
-                pygame.display.flip()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                drawlocation = event.pos
+                pygame.draw.line(screen, white, drawlocation, drawlocation)
+                pygame.display.update()
+            elif event.type == pygame.MOUSEMOTION:
+                drawlocation = event.pos
+                pygame.draw.line(screen, white, drawlocation, drawlocation)
+                pygame.display.update()
             pygame.display.update()
 
 def Mouse_Position(pos):
