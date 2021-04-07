@@ -1,26 +1,48 @@
 import pygame as pg
 import pygame.gfxdraw
+import time
+import random
 
-def Screen_initialization(x, y): #sets display for the screen
-    pygame.display.init
+pygame.init()
 
-    screen_width = x
-    screen_height = y
+black = (0,0,0)
+white = (255,255,255)
+red = (255,0,0)
+blue = (0,0,255)
+green = (0,255,0)
 
+#sets display for the screen
+pygame.display.init()
+
+screen_width = 800 #x
+screen_height = 600 #y
+
+#sets screen up
+screen = pygame.display.set_mode((screen_width, screen_height))
+screen.fill(white)
+
+pixelset = pygame.PixelArray(screen)
+pixelset[10][20] = white
+
+clock = pygame.time.Clock()
+
+def Screen_Output():
     running = True
     while running:
-        screen = pygame.display.set_mode([screen_width, screen_height])
-        screen.fill([255,255,255])
-        #pygame.display.update()
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-    return screen
+                break
+            else:
+                screen.fill(black)
+                pygame.display.flip()
+            pygame.display.update()
 
 def Mouse_Position(pos):
     while pygame.event.get() and pygame.mouse.get_focused(): #checks to see if terminal is receiving mouse
         if pygame.mouse.get_focused() == True:
-            while pygame.mouse.get_pressed(num_buttons=3)
+            #while pygame.mouse.get_pressed(num_buttons=3)
                 Mouse_drawing(pygame.mouse.get_pos()) 
                 #call screen press
 
@@ -33,7 +55,7 @@ def Mouse_drawing(pos):
 
 framerate = pygame.time.Clock()
 framerate.tick(60)
-Screen_initialization(1000, 500)
+Screen_Output()
 Mouse_Position(pygame.mouse.get_pos())
 
 #https://www.pygame.org/news
