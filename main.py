@@ -1,5 +1,4 @@
-import pygame as pg
-import pygame.gfxdraw
+import pygame
 import time
 import random
 
@@ -15,8 +14,8 @@ green = (0,255,0)
 #sets display for the screen
 pygame.display.init()
 
-screen_width = 20 #x values for screen
-screen_height = 20 #y values for screen
+screen_width = 500 #x values for screen
+screen_height = 500 #y values for screen
 
 to_scale = 10
 
@@ -25,50 +24,37 @@ to_scale = 10
 rect_width, rect_height = 2, 2
 vel = 2
 
-x = int(input('Please input x: '))
-y = int(input('Please input y: '))
+#x = int(input('Please input x: '))
+#y = int(input('Please input y: '))
 #sets screen up
 window = pygame.Surface((screen_width, screen_height))
-screen = pygame.display.set_mode((screen_width*to_scale, screen_height*to_scale))
+screen = pygame.display.set_mode((screen_width, screen_height)) #multiply both by to_scale to scale the surface up?
 
 framerate = pygame.time.Clock()
 framerate.tick(60)
-
-screen.fill(black)
 
 pixelset = pygame.PixelArray(screen)
 
 clock = pygame.time.Clock()
 
-def GameRun():
-    running = True
-    while running:
-        clock.tick(60)
-        #pygame.time.delay(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                break
-            elif event.type == pygame.MOUSEMOTION:
-                drawlocation = event.pos
-                while pygame.mouse.get_pressed() == (1, 0, 0)
-                    pygame.draw.line(screen, white, drawlocation, drawlocation)
-                    pygame.display.update()
-                #window.blits(pygame.transform.scale(screen, window.get_rect().size), (0,0))
-
+running = True
+while running: #main runner, everything is inside of here
+    clock.tick(60)
+    #pygame.time.delay(60)
+    for event in pygame.event.get():
+        screen.fill(black)
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.mouse.get_pressed(3)[0] and event.type == pygame.MOUSEMOTION:
+            drawlocation = event.pos
+            pygame.draw.line(screen, white, drawlocation, drawlocation)
             pygame.display.update()
-    return screen
+            #window.blits(pygame.transform.scale(screen, window.get_rect().size), (0,0))
 
-
-
-    while pygame.mouse.get_pressed(num_buttons=3)
-        pygame.draw.line(screen, white, drawlocation, drawlocation)
-        #call screen press
+        pygame.display.update()
             
 
 #Width = int(input("Please set the Width for the Display: "))
 #Height = int(input("Please set the Height for the Display: "))
-
-GameRun()
 
 #https://www.pygame.org/news
