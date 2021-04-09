@@ -1,7 +1,7 @@
 import pygame
 import time
 import random
-
+#change
 pygame.init()
 
 #set (Red, Green, Blue) #RGB
