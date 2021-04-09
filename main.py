@@ -15,34 +15,50 @@ green = (0,255,0)
 #sets display for the screen
 pygame.display.init()
 
-screen_width = 800 #x
-screen_height = 600 #y
+screen_width = 20 #x values for screen
+screen_height = 20 #y values for screen
 
+to_scale = 10
+
+#sets up rectangle
+
+rect_width, rect_height = 2, 2
+vel = 2
+
+x, y = 10, 10
 #sets screen up
-screen = pygame.display.set_mode((screen_width, screen_height))
-screen.fill(black)
+screen = pygame.Surface((screen_width, screen_height))
+window = pygame.display.set_mode((screen_width*to_scale, screen_height*to_scale))
+
+framerate = pygame.time.Clock()
+framerate.tick(60)
 
 pixelset = pygame.PixelArray(screen)
 
 clock = pygame.time.Clock()
 
-def Screen_Output():
-    running = True
-    while running:
-        clock.tick(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                break
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                drawlocation = event.pos
-                pygame.draw.line(screen, white, drawlocation, drawlocation)
-                pygame.display.update()
-            elif event.type == pygame.MOUSEMOTION:
-                drawlocation = event.pos
-                pygame.draw.line(screen, white, drawlocation, drawlocation)
-                pygame.display.update()
+running = True
+while running:
+    clock.tick(60)
+    pygame.time.delay(60)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            break
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            drawlocation = event.pos
+            pygame.draw.line(screen, white, drawlocation, drawlocation)
             pygame.display.update()
+        elif event.type == pygame.MOUSEMOTION:
+            drawlocation = event.pos
+            pygame.draw.line(screen, white, drawlocation, drawlocation)
+            pygame.display.update()
+
+    screen.fill(black)
+    pygame.draw.rect(screen, white, (x, y, rect_width, rect_height))
+    window.blit(pygame.transform.scale(screen, window.get_rect().size), (0,0))
+    pygame.display.update()
+
 
 def Mouse_Position(pos):
     while pygame.event.get() and pygame.mouse.get_focused(): #checks to see if terminal is receiving mouse
@@ -51,16 +67,9 @@ def Mouse_Position(pos):
                 Mouse_drawing(pygame.mouse.get_pos()) 
                 #call screen press
 
-def Mouse_drawing(pos):
-    pygame.gfxdraw.pixel(screen, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[0], color=(0, 0, 128)) #mess with
-    return
-
 #Width = int(input("Please set the Width for the Display: "))
 #Height = int(input("Please set the Height for the Display: "))
 
-framerate = pygame.time.Clock()
-framerate.tick(60)
-Screen_Output()
 Mouse_Position(pygame.mouse.get_pos())
 
 #https://www.pygame.org/news
