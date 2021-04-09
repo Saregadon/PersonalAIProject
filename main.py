@@ -14,7 +14,8 @@ green = (0,255,0)
 #sets display for the screen
 pygame.display.init()
 
-#sets screen up
+#sets up clock
+clock = pygame.time.Clock()
 
 def grid(screen, screen_width, screen_height, rows):
     distanceBetweenRows = screen_width // rows
@@ -38,10 +39,9 @@ def grid(screen, screen_width, screen_height, rows):
 def redraw(screen):
     global screen_width, screen_height, rows
     screen.fill((black))
-    grid(screen, screen_width, screen_height)
+    grid(screen, screen_width, screen_height, rows)
     pygame.display.update()
 
-clock = pygame.time.Clock()
 def main():
     global screen_width, screen_height, rows
     screen_width = 500 #x values for screen
